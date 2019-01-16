@@ -1,6 +1,8 @@
 module.exports = (app, db) => {
 
-  //const pokemons = require('./controllers/pokemon')(db);
+  const places = require('./controllers/places.js') (db);
+
+  app.get('/places', places.index);
 
   /*
    *  =========================================
@@ -8,5 +10,4 @@ module.exports = (app, db) => {
    *  =========================================
    */
 
-  //app.get('/pokemons', pokemons.index);
 };

@@ -1,6 +1,6 @@
 const pg = require('pg');
-const pokemon = require('./models/pokemon');
-const user = require('./models/user');
+const places = require('./models/places');
+// const user = require('./models/user');
 const url = require('url');
 
 
@@ -24,7 +24,7 @@ if( process.env.DATABASE_URL ){
   configs = {
     user: 'ishak',
     host: '127.0.0.1',
-    database: 'proj4',
+    database: 'proj2',
     port: 5432
   };
 }
@@ -37,10 +37,11 @@ pool.on('error', function (err) {
 });
 
 module.exports = {
-  /*
-
+    /*
+   * ADD APP MODELS HERE
    */
-    user: pokemon(pool),
+    // user: user(pool),
+    places: places(pool),
 
 
   //make queries directly from here
