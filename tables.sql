@@ -12,10 +12,10 @@ CREATE TABLE IF NOT EXISTS places (
 	address TEXT,
 	amenities TEXT,
 	open_hours TEXT,
-	area_id TEXT
-)
+	areas_id TEXT
+);
 
-CREATE TABLE IF NOT EXISTS areas {
+CREATE TABLE IF NOT EXISTS areas (
 	id SERIAL PRIMARY KEY,
 	area TEXT
-}
+);
