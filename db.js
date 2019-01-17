@@ -1,6 +1,6 @@
 const pg = require('pg');
 const places = require('./models/places');
-const user = require('./models/users');
+const users = require('./models/users');
 const url = require('url');
 
 
@@ -40,7 +40,7 @@ module.exports = {
     /*
    * ADD APP MODELS HERE
    */
-    // user: user(pool),
+    users: users(pool),
     places: places(pool),
 
 

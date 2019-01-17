@@ -5,11 +5,14 @@ module.exports = (db) => {
     };
 
     let registerUser = (request, response) => {
-
-        let completeInsert = (data) => {
-            respond.redirect('place/home');
-        }
-        db.users.newUser(completeInsert);
+        db.users.newUser(request.body, (error,queryResult) =>{
+            if (error) {
+                console.log("error", error);
+            } else {
+                console.log("Okay!");
+                response.redirect('/places')
+            }
+        });
     };
 
     return {
