@@ -1,3 +1,5 @@
+const sha256 = require('js-sha256');
+
 module.exports = (dbPoolInstance) => {
 
   let hash = (pwd) => {
@@ -7,7 +9,7 @@ module.exports = (dbPoolInstance) => {
 
   let newUser = (reqBody,callback) =>{
       let queryText = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
-      let values = [reqBody.name, reqBody.username, reqBody.password];
+      let values = [reqBody.name, reqBody.username, hash(reqBody.password)];
 
       dbPoolInstance.query(queryText, values, (error, queryResult )=>{
             callback(error,queryResult);
