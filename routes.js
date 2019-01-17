@@ -4,6 +4,7 @@ module.exports = (app, db) => {
 
   app.get('/places', places.index);
 
+
   /*
    *  =========================================
    *  Routes for one controller

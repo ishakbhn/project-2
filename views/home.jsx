@@ -16,28 +16,6 @@ class Home extends React.Component {
         })
         return(
             <DefaultLayout>
-                <div className = "container-fluid px-0">
-                    <div className = "row">
-                        <div className = "col">
-                            <h1 className= "text-center header py-3 m-0"> Where to study? </h1>
-                        </div>
-                    </div>
-                    <div className = "row">
-                        <div className = "col">
-                            <ul className="nav justify-content-end bg-dark">
-                                <li className="nav-item">
-                                  <a className="nav-link text-white" href="/places">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                  <a className="nav-link text-white" href="#">Log In</a>
-                                </li>
-                                <li className="nav-item">
-                                  <a className="nav-link text-white" href="#">Register</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
                     <div className = "container mt-3">
                         <div className = "row">
                             <div className = "col-3">
@@ -56,7 +34,6 @@ class Home extends React.Component {
                             </div>
                         </div>
                     </div>
-                </div>
             </DefaultLayout>
         )
     }
