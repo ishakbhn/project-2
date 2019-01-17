@@ -5,18 +5,20 @@ class Home extends React.Component {
     render() {
 
         const allPlaces = this.props.all.map((data,index) =>{
-            return <div key = {index}>
+            return <div className="px-3 mb-5"key = {index}>
                     <h4> {data.place_name} </h4>
-                    <img src= {data.img_url} alt="place_pic"/>
-                    <p> Address: {data.address} </p>
-                    <p> Amenities: {data.amenities} </p>
-                    <p> Opening hours: {data.open_hours} </p>
+                    <img className = "m-3" src= {data.img_url} alt="place_pic"/>
+                    <div className = "ml-3">
+                        <p> Address: {data.address} </p>
+                        <p> Amenities: {data.amenities} </p>
+                        <p> Opening hours: {data.open_hours} </p>
+                    </div>
                    </div>
 
         })
         return(
             <DefaultLayout>
-                    <div className = "container mt-3">
+                    <div className = "container mt-4">
                         <div className = "row">
                             <div className = "col-3">
                                 <form>

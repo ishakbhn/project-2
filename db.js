@@ -1,6 +1,6 @@
 const pg = require('pg');
 const places = require('./models/places');
-// const user = require('./models/user');
+const user = require('./models/users');
 const url = require('url');
 
 

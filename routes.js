@@ -1,8 +1,7 @@
 module.exports = (app, db) => {
 
   const places = require('./controllers/places.js') (db);
-
-  app.get('/places', places.index);
+  const users = require('./controllers/users.js') (db);
 
 
   /*
@@ -11,4 +10,7 @@ module.exports = (app, db) => {
    *  =========================================
    */
 
+     app.get('/places', places.index);
+     app.get('/users/new', users.createForm);
+     // app.post('/users/new',users.registerUser);
 };
