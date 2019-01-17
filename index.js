@@ -13,6 +13,7 @@ const db = require('./db');
 const app = express();
 
 // Set up middleware
+app.use(express.static(__dirname+'/public/'));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
 app.use(express.urlencoded({
