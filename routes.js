@@ -12,5 +12,6 @@ module.exports = (app, db) => {
 
      app.get('/places', places.index);
      app.get('/users/new', users.createForm);
-     // app.post('/users/new',users.registerUser);
+     // app.get('users/login',users.login);
+     app.post('/users/new',users.registerUser);
 };

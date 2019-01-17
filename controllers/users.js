@@ -4,8 +4,17 @@ module.exports = (db) => {
         response.render('users/register');
     };
 
+    let registerUser = (request, response) => {
+
+        let completeInsert = (data) => {
+            respond.redirect('place/home');
+        }
+        db.users.newUser(completeInsert);
+    };
+
     return {
         createForm,
+        registerUser,
     };
 };
 
