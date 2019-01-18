@@ -8,7 +8,7 @@ module.exports = (dbPoolInstance) => {
   }
 
   let newUser = (reqBody,callback) =>{
-      let queryText = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3)';
+      let queryText = 'INSERT INTO users (name, username, password) VALUES ($1, $2, $3)';
       let values = [reqBody.name, reqBody.username, hash(reqBody.password)];
 
       dbPoolInstance.query(queryText, values, (error, queryResult )=>{

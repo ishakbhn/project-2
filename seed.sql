@@ -1,4 +1,4 @@
-INSERT INTO users (name, email, password) VALUES ('adam', 'adam@gmail.com', NULL);
+INSERT INTO users (name, username, password) VALUES ('adam', 'adam@gmail.com', '55e8deabdf5b0e8860f02388aa2f8e43f9a66aca47ede0a4d04c921e20f0c9db');
 
 INSERT INTO areas (area) VALUES ('north');
 INSERT INTO areas (area) VALUES ('east');
