@@ -9,7 +9,7 @@ module.exports = (db) => {
             if (error) {
                 console.log("error", error);
             } else {
-                console.log("Okay!");
+                console.log("Okay registered User!");
                 response.redirect('/places')
             }
         });

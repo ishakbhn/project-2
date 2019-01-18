@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS places (
 	address TEXT,
 	amenities TEXT,
 	open_hours TEXT,
-	areas_id TEXT
+	areas_id INT
 );
 
 CREATE TABLE IF NOT EXISTS areas (
