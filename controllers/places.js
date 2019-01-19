@@ -29,12 +29,19 @@ module.exports = (db) => {
         });
     };
 
-// res.render('places/home',{all:queryResult});
-
     let createPlace = (req,res)=> {
+        res.render('places/add-place')
+    };
 
-        res.send("createPlace is working, so need to create form");
+    let addPlace = (req,res)=> {
 
+        db.places.addNewPlace (req.body, (error, queryResult)=>{
+            if (error) {
+                console.log("got error ", error);
+            } else {
+                res.redirect('/places');
+            }
+        })
     };
 
 
@@ -42,6 +49,7 @@ module.exports = (db) => {
         index,
         filter,
         createPlace,
+        addPlace,
     };
 
 };

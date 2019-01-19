@@ -50,8 +50,22 @@ module.exports = (dbPoolInstance) => {
         })
     };
 
+
+    let addNewPlace = (requestBody,callback) => {
+        let amenities = requestBody.amenities.toString();
+
+        let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6)';
+        let values = [requestBody.name, requestBody.address,  requestBody.img_url, amenities, requestBody.open_hours, requestBody.area];
+
+        dbPoolInstance.query(queryText, values, (error, queryResult)=>{
+            callback(error, queryResult);
+        })
+
+    }
+
     return {
     getAllPlaces,
     filterArea,
+    addNewPlace,
     };
 };

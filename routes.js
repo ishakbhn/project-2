@@ -16,5 +16,5 @@ module.exports = (app, db) => {
      app.get('/places/search', places.filter);
      // app.get('users/login',users.login);
      app.post('/users/new',users.registerUser);
-
+     app.post('/places/new',places.addPlace);
 };
