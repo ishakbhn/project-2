@@ -13,7 +13,7 @@ class NewForm extends React.Component {
                                 <form  action="/users/new" method="post" >
                                     <div className="form-group">
                                         <label>Name:</label>
-                                        <input name= "name"type="text" className="form-control required" placeholder="name" required/>
+                                        <input name= "name" type="text" className="form-control required" placeholder="name" required/>
                                     </div>
                                     <div className="form-group">
                                         <label>Username:</label>

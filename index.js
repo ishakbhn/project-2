@@ -36,13 +36,13 @@ app.engine('jsx', reactEngine);
 require('./routes')(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
-app.get('/', (request, response) => {
+app.get('/', (req, res) => {
   response.send('home');
 });
 
 // Catch all unmatched requests and return 404 not found page
-app.get('*', (request, response) => {
-  response.send('notfound');
+app.get('*', (req, res) => {
+  res.send('notfound');
 });
 
 /**

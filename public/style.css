@@ -6,6 +6,11 @@ h1{
   font-family: 'Amaranth', sans-serif;
 }
 
+#add-btn {
+	color: white;
+	text-decoration: none;
+}
+
 .img-fluid{
 	height: 320px;
 	min-width: 85%;

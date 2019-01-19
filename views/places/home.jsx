@@ -3,7 +3,7 @@ var DefaultLayout = require('../default');
 
 class Home extends React.Component {
     render() {
-
+        console.log(this.props.all);
         const allPlaces = this.props.all.map((data,index) =>{
             return <div className="p-3 mb-5 bg-light"key = {index}>
                     <h4 className="text-center"> {data.place_name} </h4>
@@ -23,10 +23,11 @@ class Home extends React.Component {
                     <div className = "container mt-5">
                         <div className = "row">
                             <div className = "container col-3 bg-light" id="filter">
-                                <form className="p-3" action="/places/filter" method="POST">
+                                <form className="p-3" action="/places/search">
                                     <h4> Filter by:</h4>
                                         <label>Area:</label>
                                             <select className="form-control" name="area">
+                                              <option> select area </option>
                                               <option value="1">North</option>
                                               <option value="2">East</option>
                                               <option value ="3">South</option>
@@ -41,7 +42,7 @@ class Home extends React.Component {
                                                 </div>
                                                 <div className="form-check">
                                                 <input type="checkbox" className="form-check-input" name="amenities" value="Power-point"/>
-                                                <label className="form-check-label">Power-point</label>
+                                                <label className="form-check-label">Power-outlet</label>
                                                 </div>
                                                 <div className="form-check">
                                                 <input type="checkbox" className="form-check-input" name="amenities" value="Aircon"/>
@@ -51,6 +52,9 @@ class Home extends React.Component {
 
                                             <div className="my-3 text-right">
                                                 <button type="submit" className="btn btn-primary">Filter</button>
+                                            </div>
+                                            <div className="text-center" >
+                                                <button className="btn btn-primary"><a href="/places/new" id="add-btn"> Add New Study Place</a></button>
                                             </div>
                                 </form>
                             </div>
