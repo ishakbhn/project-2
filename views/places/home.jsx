@@ -3,7 +3,7 @@ var DefaultLayout = require('../default');
 
 class Home extends React.Component {
     render() {
-        console.log(this.props.all);
+        // console.log(this.props.all);
         const allPlaces = this.props.all.map((data,index) =>{
             return <div className="p-3 mb-5 bg-light"key = {index}>
                     <h4 className="text-center"> {data.place_name} </h4>
