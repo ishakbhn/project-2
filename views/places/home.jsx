@@ -26,7 +26,7 @@ class Home extends React.Component {
                     <div className = "container mt-5">
                         <div className = "row">
                             <div className = "container col-3 p-3 bg-light" id="filter">
-                                <form className="p-3 m-3" action="/places/search">
+                                <form className="p-3" action="/places/search">
                                     <h4> Filter by:</h4>
                                         <label>Area:</label>
                                             <select className="form-control my-2" name="area">

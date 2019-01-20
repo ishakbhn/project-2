@@ -7,12 +7,12 @@ class CreatePlace extends React.Component {
             <DefaultLayout>
                 <div className="container bg-light my-5">
                     <div className="row">
-                        <div className="col-sm">
-                            <h1 className="text-center">Registration Form</h1>
+                        <div className="col-sm mt-4">
+                            <h1 className="text-center">New Study Place</h1>
                         </div>
                     </div>
 
-                    <div className ="row">
+                    <div className ="row mx-5">
                         <div className="col-sm">
 
                             <form  encType="multipart/form-data" action="/places/new" method="post" >
