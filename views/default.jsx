@@ -26,7 +26,7 @@ class DefaultLayout extends React.Component {
                                 <a className="nav-link text-white" href="/places">Home</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link text-white" href="#">Log In</a>
+                                <a className="nav-link text-white" href="/users/login">Log In</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link text-white" href="/users/new">Register</a>

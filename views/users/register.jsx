@@ -8,7 +8,7 @@ class NewForm extends React.Component {
             <div className="form-wrapper mt-5">
                 <div className="container form-main">
                     <div className="row form-container justify-content-center">
-                        <div className="col-md-6 col-md-offset-3 bg-secondary rounded p-3">
+                        <div className="col-md-6 col-md-offset-3 bg-white rounded p-3">
                             <h1 className="text-center">Registration Form</h1>
                                 <form  action="/users/new" method="post" >
                                     <div className="form-group">

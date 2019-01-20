@@ -1,23 +1,28 @@
 module.exports = (db) => {
 
-    let createForm = (request, response) => {
-        response.render('users/register');
+    let createForm = (req, res) => {
+        res.render('users/register');
     };
 
-    let registerUser = (request, response) => {
-        db.users.newUser(request.body, (error,queryResult) =>{
+    let registerUser = (req, res) => {
+        db.users.newUser(req.body, (error,queryResult) =>{
             if (error) {
                 console.log("error", error);
             } else {
                 console.log("Okay registered User!");
-                response.redirect('/places')
+                res.redirect('/places')
             }
         });
     };
 
+    let logIn = (req,res) => {
+        res.render('users/login');
+    }
+
     return {
         createForm,
         registerUser,
+        logIn,
     };
 };
 
