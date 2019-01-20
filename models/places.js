@@ -30,34 +30,49 @@ module.exports = (dbPoolInstance) => {
     // }
 
     let filterArea = (query,callback)=> {
-        // console.log(query);
-        // let numOfObj = Object.keys(query);
-        // console.log("numOfObj length =", numOfObj.length);
 
-        // console.log("okayyy!");
 
-        let numFilter = Object.keys(query);
+        let filterOption = Object.keys(query);
         let areaId = null;
-        let amenityId = null;
+        let amenities = null;
+        console.log("Object.keys query ", filterOption);
+        console.log("length", filterOption.length);
+        console.log("amenities ", query.amenities);
+        // console.log("amenities 0 and 1",query.amenities[0], query.amenities[1])
+
+            if (filterOption.length > 1) {
+                if(query.amenities.length > 1) {
+                    areaId = query.area;
+                    amenities = query.amenities.join(", ");
+                    console.log(amenities);
+
+                let queryText = `SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.areas_id = ${areaId} AND places.amenities LIKE '%${amenities}%'`;
+                    console.log(queryText);
+
+                    doQuery(queryText);
+                }
+            } else {
+                if (query.area != "select area") {
+                    areaId = query.area;
+                    console.log("value of areaId",areaId);
 
 
-            if (numFilter.length > 1) {
-                areaId = query.area;
-                amenityId = query.amenities;
-             } else {
-                areaId = query.area;
-                amenityId = query.amenities;
-             }
+                    // console.log("areaId and amenities ", areaId, amenities);
 
-        // console.log("container of areaId", areaId);
-        // console.log("container of amenityId", amenityId);
+                    let queryText = `SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.areas_id = ${areaId}` ;
 
-        let queryText = 'SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.areas_id =' + areaId;
+                    doQuery(queryText);
+                }
 
-        dbPoolInstance.query(queryText, (error,queryResult)=>{
-                console.log(queryResult.rows);
-                callback(null, queryResult.rows);
-        })
+            }
+
+                function doQuery (queryText) {
+                    dbPoolInstance.query(queryText, (error,queryResult)=>{
+                            console.log(queryResult.rows);
+                            callback(null, queryResult.rows);
+                    });
+                }
+
     };
 
 

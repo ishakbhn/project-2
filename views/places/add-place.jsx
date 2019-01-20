@@ -5,7 +5,7 @@ class CreatePlace extends React.Component {
     render() {
         return(
             <DefaultLayout>
-                <div className="container">
+                <div className="container bg-light my-5">
                     <div className="row">
                         <div className="col-sm">
                             <h1 className="text-center">Registration Form</h1>

@@ -25,11 +25,11 @@ class Home extends React.Component {
             <DefaultLayout>
                     <div className = "container mt-5">
                         <div className = "row">
-                            <div className = "container col-3 bg-light" id="filter">
-                                <form className="p-3" action="/places/search">
+                            <div className = "container col-3 p-3 bg-light" id="filter">
+                                <form className="p-3 m-3" action="/places/search">
                                     <h4> Filter by:</h4>
                                         <label>Area:</label>
-                                            <select className="form-control" name="area">
+                                            <select className="form-control my-2" name="area">
                                               <option> select area </option>
                                               <option value="1">North</option>
                                               <option value="2">East</option>
@@ -44,8 +44,8 @@ class Home extends React.Component {
                                                 <label className="form-check-label">Wifi</label>
                                                 </div>
                                                 <div className="form-check">
-                                                <input type="checkbox" className="form-check-input" name="amenities" value="Power-point"/>
-                                                <label className="form-check-label">Power-outlet</label>
+                                                <input type="checkbox" className="form-check-input" name="amenities" value="Power Outlets"/>
+                                                <label className="form-check-label">Power-Outlets</label>
                                                 </div>
                                                 <div className="form-check">
                                                 <input type="checkbox" className="form-check-input" name="amenities" value="Aircon"/>
@@ -53,10 +53,23 @@ class Home extends React.Component {
                                                 </div>
                                             </div>
 
-                                            <div className="my-3 text-right">
+                                            <div className= "my-3">
+                                                <label>Opening Hours:</label>
+                                                <div className="form-check">
+                                                <input type="checkbox" className="form-check-input" name="open_hours" value="24/7"/>
+                                                <label className="form-check-label">24/7</label>
+                                                </div>
+                                                <div className="form-check">
+                                                <input type="checkbox" className="form-check-input" name="open_hours" value="not 24/7"/>
+                                                <label className="form-check-label">Not 24/7</label>
+                                                </div>
+
+                                            </div>
+
+                                            <div className="my-4 text-center">
                                                 <button type="submit" className="btn btn-primary">Filter</button>
                                             </div>
-                                            <div className="text-center" >
+                                            <div className="my-3 text-center" >
                                                 <button className="btn btn-primary"><a href="/places/new" id="add-btn"> Add New Study Place</a></button>
                                             </div>
                                 </form>

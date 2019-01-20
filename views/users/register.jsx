@@ -9,22 +9,22 @@ class NewForm extends React.Component {
                 <div className="container form-main">
                     <div className="row form-container justify-content-center">
                         <div className="col-md-6 col-md-offset-3 bg-white rounded p-3">
-                            <h1 className="text-center">Registration Form</h1>
+                            <h2 className="text-center">Register</h2>
                                 <form  action="/users/new" method="post" >
                                     <div className="form-group">
                                         <label>Name:</label>
-                                        <input name= "name" type="text" className="form-control required" placeholder="name" required/>
+                                        <input name= "name" type="text" className="form-control required" placeholder="Enter name here" required/>
                                     </div>
                                     <div className="form-group">
                                         <label>Username:</label>
-                                        <input name= "username" type="email" className="form-control required" placeholder="Enter email" required/>
+                                        <input name= "username" type="email" className="form-control required" placeholder="Email address" required/>
                                     </div>
                                     <div className="form-group">
                                         <label>Password:</label>
                                         <input name= "password" type="password" className="form-control" placeholder="Password" required/>
                                     </div>
                                     <div className="row justify-content-center">
-                                     <button type="submit" className="btn btn-primary">Submit</button>
+                                     <button type="submit" className="btn btn-primary text-uppercase">Submit</button>
                                     </div>
                                 </form>
                         </div>

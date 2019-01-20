@@ -11,7 +11,7 @@ class Login extends React.Component {
                   <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="card card-signin my-5">
                       <div class="card-body">
-                        <h5 class="card-title text-center">Sign In</h5>
+                        <h2 class="card-title text-center">Sign In</h2>
                         <form class="form-signin">
                             <div class="form-label-group">
                               <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autoFocus/>
