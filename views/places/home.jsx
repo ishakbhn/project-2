@@ -1,14 +1,17 @@
 var React = require ('react');
 var DefaultLayout = require('../default');
 
+
+
 class Home extends React.Component {
     render() {
         // console.log(this.props.all);
         const allPlaces = this.props.all.map((data,index) =>{
+            let imgLink = `http://res.cloudinary.com/dhapevpz3/image/upload/${data.img_url}`;
             return <div className="p-3 mb-5 bg-light"key = {index}>
                     <h4 className="text-center"> {data.place_name} </h4>
                     <div className="d-flex justify-content-center" >
-                    <img className = "img-fluid m-3" src= {data.img_url} alt="place_pic"/>
+                    <img className = "img-fluid m-3" src={imgLink} alt="place_pic"/>
                     </div>
                     <div className = "mx-5 px-4">
                         <p> Address: {data.address} </p>

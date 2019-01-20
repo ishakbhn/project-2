@@ -1,3 +1,12 @@
+
+var cloudinary = require('cloudinary');
+
+cloudinary.config({
+  cloud_name: 'dhapevpz3',
+  api_key: '838369681129464',
+  api_secret: 'We6XJXDK-Md0GOR1ZSr17_uDua0'
+});
+
 module.exports = (dbPoolInstance) => {
 
     let getAllPlaces = (completed) =>{
@@ -46,21 +55,46 @@ module.exports = (dbPoolInstance) => {
         let queryText = 'SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.areas_id =' + areaId;
 
         dbPoolInstance.query(queryText, (error,queryResult)=>{
-                callback(null, queryResult.rows[0]);
+                console.log(queryResult.rows);
+                callback(null, queryResult.rows);
         })
     };
 
 
-    let addNewPlace = (requestBody,callback) => {
-        let amenities = requestBody.amenities.join(", ");
+    let addNewPlace = (requestBody,photoName,callback) => {
+        // console.log("request body ", requestBody);
 
-        let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6)';
-        let values = [requestBody.name, requestBody.address,  requestBody.img_url, amenities, requestBody.open_hours, requestBody.area];
+        let path = `photo-uploads/${photoName}`;
 
-        dbPoolInstance.query(queryText, values, (error, queryResult)=>{
-            callback(error, queryResult);
-        })
+        uploadPhoto(path, insertData);
+        function uploadPhoto (link,callback) {
+                console.log("Second Upload photo function");
+                cloudinary.uploader.upload(link, (result)=>{
+                console.log("Third execute cloudinary");
+                console.log("Fourth value in result ", result.public_id);
 
+                callback(result.public_id);
+
+                });
+            };
+
+
+        function insertData (publicId) {
+            let amenities = requestBody.amenities.join(", ");
+            let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+            let values = [requestBody.name, requestBody.address,  publicId, amenities, requestBody.open_hours, requestBody.area];
+                dbPoolInstance.query(queryText, values, (error, queryResult)=>{
+                    console.log(queryResult.rows);
+                    callback(error,queryResult.rows);
+                });
+        }
+
+        // cloudinary.uploader.upload(reqFilePath, (result) => {
+
+        //         res.send(data);
+        //     }
+        // console.log("places addNewPlace ", reqFilePath);
+        // console.log(requestBody);
     }
 
     return {

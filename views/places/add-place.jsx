@@ -15,7 +15,7 @@ class CreatePlace extends React.Component {
                     <div className ="row">
                         <div className="col-sm">
 
-                            <form  action="/places/new" method="post" >
+                            <form  encType="multipart/form-data" action="/places/new" method="post" >
                                 <div className="form-group my-3">
                                     <label>Name of place:</label>
                                     <input name= "name" type="text" className="form-control required" placeholder="Jurong East Library" required/>
@@ -28,7 +28,9 @@ class CreatePlace extends React.Component {
 
                                 <div className="form-group my-3">
                                     <label>Image:</label>
-                                    <input name= "img_url" type="text" className="form-control required" placeholder="jurong_east.jpg" required/>
+                                    <div>
+                                    <input name= "img_url" type="file"/>
+                                    </div>
                                 </div>
 
                                 <label>Amenities:</label>

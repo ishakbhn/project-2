@@ -1,5 +1,5 @@
-module.exports = (db) => {
 
+module.exports = (db) => {
 
     let index = (req, res)=>{
         // run this function when the query is done
@@ -20,9 +20,7 @@ module.exports = (db) => {
                 if (queryResult === null) {
                     console.log("error")
                 } else {
-                    //response.send(queryResult);
-                    let result = [queryResult];
-                     res.render('places/home',{all:result});
+                     res.render('places/home',{all:queryResult});
 
                 }
             }
@@ -33,17 +31,32 @@ module.exports = (db) => {
         res.render('places/add-place')
     };
 
+
+
     let addPlace = (req,res)=> {
+        let photo = req.files.img_url;
 
-        db.places.addNewPlace (req.body, (error, queryResult)=>{
-            if (error) {
-                console.log("got error ", error);
-            } else {
-                res.redirect('/places');
-            }
-        })
+        upload(photo, doneQuery);
+
+        function upload (data,next) {
+             data.mv(`photo-uploads/${data.name}`, (err)=>{
+                if (err) {
+                    console.log("ERROR",err);
+                } else {
+                    console.log("this first upload okay!");
+                }
+            });
+             next()
+        }
+
+        function doneQuery () {
+            db.places.addNewPlace (req.body,photo.name,(queryResult)=>{
+                console.log("Result of query ", queryResult);
+
+                res.redirect("/places");
+            });
+        }
     };
-
 
     return {
         index,
@@ -51,5 +64,4 @@ module.exports = (db) => {
         createPlace,
         addPlace,
     };
-
 };

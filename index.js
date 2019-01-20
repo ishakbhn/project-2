@@ -2,6 +2,9 @@ const express = require('express');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
 const db = require('./db');
+const fileUpload = require('express-fileupload');
+
+
 
 /**
  * ===================================
@@ -13,6 +16,7 @@ const db = require('./db');
 const app = express();
 
 // Set up middleware
+app.use(fileUpload());
 app.use(express.static(__dirname+'/public/'));
 app.use(methodOverride('_method'));
 app.use(cookieParser());
