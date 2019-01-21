@@ -53,6 +53,13 @@ module.exports = (dbPoolInstance) => {
                     let queryText = `SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.areas_id = ${areaId}` ;
 
                     doQuery(queryText);
+                } else {
+                    amenities = qeury.amenities();
+
+                    let queryText = `SELECT areas.area, places.place_name,places.img_url, places.address, places.amenities, places.open_hours FROM places INNER JOIN areas ON (areas.id = places.areas_id) WHERE places.amenities LIKE '%${amenities}%'`;
+
+                    doQuery(queryText);
+
                 }
 
             }
@@ -104,6 +111,38 @@ module.exports = (dbPoolInstance) => {
                     callback(null,null);
                 }
             });
+    };
+
+
+    let currentPlace = (params,callback)=> {
+        let placeId = params;
+
+        let queryText = `SELECT * FROM places WHERE id = ${placeId}`;
+
+            dbPoolInstance.query(queryText, (error, queryResult)=>{
+                if (error) {
+                    callback(error, null);
+                } else {
+
+                    callback(null, {places:queryResult.rows[0]});
+                }
+            });
+    };
+
+
+    let updatePlace = (reqBody,params,callback)=> {
+        let body = reqBody;
+        let placeId = params;
+
+        let queryText = `UPDATE places SET place_name ='${body.name}', address = '${body.address}', amenities = '${body.amenities}', open_hours ='${body.open_hours}', areas_id=${body.area} WHERE id=${placeId}`;
+        console.log("qeuryText", queryText);
+            dbPoolInstance.query(queryText, (error,queryResult)=>{
+                if (error){
+                    callback (error, null);
+                } else {
+                    callback(null,queryResult.rows);
+                }
+            });
     }
 
     return {
@@ -111,5 +150,7 @@ module.exports = (dbPoolInstance) => {
     filterArea,
     addNewPlace,
     deleteCurrent,
+    currentPlace,
+    updatePlace,
     };
 };

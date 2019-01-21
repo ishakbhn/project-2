@@ -34,10 +34,13 @@ module.exports = (db) => {
                                         name: usersDb[i].name,
                                         username: usersDb[i].username,
                                         pwd: password })
-                                    res.redirect('/places');
+                                    res.render('places/home',);
                                     return
                                 } else {
-                                    res.send("wrong password!");
+                                    let wrongAuth = "Wrong Password";
+                                    console.log({change:wrongAuth});
+                                    // res.render('login',{change:wrongAuth});
+                                    res.send("Wrong password");
                                     return;
                                 }
                              //if username did not exist

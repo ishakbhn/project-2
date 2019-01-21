@@ -6,8 +6,6 @@ var DefaultLayout = require('../default');
 class Home extends React.Component {
     render() {
         // console.log("Values in this props logged :", this.props.logged);
-
-
         const allPlaces = this.props.all.map((data,index) =>{
             let editLink = `/places/edit/${data.id}`;
             let delLink = `/places/delete/${data.id}?_method=DELETE`;
@@ -23,9 +21,7 @@ class Home extends React.Component {
                         <p> Opening hours: {data.open_hours} </p>
                         </div>
                         <div className="my-2 mx-5 px-3 text-right">
-                            <form className="edit-form" method="put" action={editLink}>
-                                <button className="btn btn-info mx-3" type="submit">Edit</button>
-                            </form>
+                                <button className="btn btn-info mx-3" type="submit"><a className="text-white" href={editLink}>Edit</a></button>
                             <form className="edit-form" method="POST" action={delLink}>
                                 <button className="btn btn-danger " type="submit">Delete</button>
                             </form>

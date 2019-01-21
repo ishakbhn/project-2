@@ -4,21 +4,6 @@ module.exports = (db) => {
     let index = (req, res)=>{
         // run this function when the query is done
         let doneQuery = (places) =>{
-            // let check = null;
-
-            // if (req.cookies.loggedin === undefined)  {
-            //     check = {
-            //         btn: "Log In",
-            //         visibility: "invisible"
-            //     }
-            // } else {
-            //     check = {
-            //         btn: "Log Out",
-            //         visibility: "visible"
-            //     }
-            // }
-            // , logged:check}
-
             res.render('places/home',{all:places});
         };
 
@@ -79,11 +64,35 @@ module.exports = (db) => {
         });
     };
 
+    let editForm = (req,res)=> {
+        db.places.currentPlace(req.params.id,(err,queryResult)=>{
+            if (err) {
+                console.log("error",err);
+            } else {
+                res.render('places/edit-form',queryResult);
+
+            }
+        });
+    };
+
+    let updateForm = (req,res)=> {
+        console.log("params id", req.params.id);
+        db.places.updatePlace(req.body, req.params.id,(err,queryResult)=>{
+            if (err) {
+                console.log("error at controller",err);
+            } else {
+                res.redirect('/places');
+            }
+        });
+    };
+
     return {
         index,
         filter,
         createPlace,
         addPlace,
         deletePlace,
+        editForm,
+        updateForm,
     };
 };

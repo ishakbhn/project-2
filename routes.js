@@ -18,7 +18,8 @@ module.exports = (app, db) => {
      app.get('/users/new', users.createForm);
      app.post('/users/new',users.registerUser);
      app.get('/places/search', places.filter);
-     // app.get('/places/:id/edit', places.editForm);
+     app.get('/places/edit/:id', places.editForm);
+     app.put('/places/:id', places.updateForm);
      app.delete('/places/delete/:id', places.deletePlace);
 
 

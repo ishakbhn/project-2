@@ -1,8 +1,11 @@
 var React = require ('react');
 var DefaultLayout = require('../default');
 
-class CreatePlace extends React.Component {
+class EditForm extends React.Component {
     render() {
+        const place = this.props.places;
+        const actionPath = `/places/${place.id}?_method=PUT`;
+
         return(
             <DefaultLayout>
                 <div className="container bg-light my-5">
@@ -15,22 +18,15 @@ class CreatePlace extends React.Component {
                     <div className ="row mx-5">
                         <div className="col-sm">
 
-                            <form  encType="multipart/form-data" action="/places/new" method="post" >
+                            <form  encType="multipart/form-data" action={actionPath} method="POST" >
                                 <div className="form-group my-3">
                                     <label>Name of place:</label>
-                                    <input name= "name" type="text" className="form-control required" placeholder="Jurong East Library" required/>
+                                    <input name= "name" type="text" className="form-control required" defaultValue={place.place_name} required/>
                                 </div>
 
                                 <div className="form-group my-3">
                                     <label>Address:</label>
-                                    <input name= "address" type="text" className="form-control required" placeholder="21 Jurong East Central 1, Singapore 609732" required/>
-                                </div>
-
-                                <div className="form-group my-3">
-                                    <label>Image:</label>
-                                    <div>
-                                    <input name= "img_url" type="file"/>
-                                    </div>
+                                    <input name= "address" type="text" className="form-control required" defaultValue={place.address}required/>
                                 </div>
 
                                 <label>Amenities:</label>
@@ -49,7 +45,7 @@ class CreatePlace extends React.Component {
 
                                 <div className="form-group my-3">
                                     <label>Opening hours:</label>
-                                    <input name= "open_hours" type="text" className="form-control" placeholder="10am - 9pm" required/>
+                                    <input name= "open_hours" type="text" className="form-control" defaultValue={place.open_hours} required/>
                                 </div>
 
                                 <div>
@@ -73,8 +69,9 @@ class CreatePlace extends React.Component {
                     </div>
                 </div>
             </DefaultLayout>
+
         )
     }
 }
 
-module.exports = CreatePlace;
+module.exports = EditForm;
