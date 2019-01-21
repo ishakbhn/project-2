@@ -10,7 +10,7 @@ cloudinary.config({
 module.exports = (dbPoolInstance) => {
 
     let getAllPlaces = (completed) =>{
-        let queryText = 'SELECT * FROM places';
+        let queryText = 'SELECT * FROM places ORDER BY place_name ASC';
 
         dbPoolInstance.query(queryText, (error, queryResult )=>{
         // console.log( "done with query", queryResult.rows );
@@ -78,18 +78,15 @@ module.exports = (dbPoolInstance) => {
 
     let addNewPlace = (requestBody,photoName,callback) => {
         // console.log("request body ", requestBody);
-
         let path = `photo-uploads/${photoName}`;
 
         uploadPhoto(path, insertData);
         function uploadPhoto (link,callback) {
-                console.log("Second Upload photo function");
+                // console.log("Second Upload photo function");
                 cloudinary.uploader.upload(link, (result)=>{
-                console.log("Third execute cloudinary");
-                console.log("Fourth value in result ", result.public_id);
-
-                callback(result.public_id);
-
+                // console.log("Third execute cloudinary");
+                // console.log("Fourth value in result ", result.public_id);
+                    callback(result.public_id);
                 });
             };
 
@@ -99,17 +96,10 @@ module.exports = (dbPoolInstance) => {
             let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
             let values = [requestBody.name, requestBody.address,  publicId, amenities, requestBody.open_hours, requestBody.area];
                 dbPoolInstance.query(queryText, values, (error, queryResult)=>{
-                    console.log(queryResult.rows);
+                    // console.log(queryResult.rows);
                     callback(error,queryResult.rows);
                 });
         }
-
-        // cloudinary.uploader.upload(reqFilePath, (result) => {
-
-        //         res.send(data);
-        //     }
-        // console.log("places addNewPlace ", reqFilePath);
-        // console.log(requestBody);
     }
 
     return {

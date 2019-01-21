@@ -6,6 +6,7 @@ module.exports = (db) => {
         let doneQuery = (places) =>{
         res.render('places/home',{all:places});
         };
+
         db.places.getAllPlaces(doneQuery);
     };
 
@@ -16,13 +17,11 @@ module.exports = (db) => {
             if (error) {
                 console.log("error at controller", error);
             } else {
-
-                if (queryResult === null) {
-                    console.log("error")
-                } else {
-                     res.render('places/home',{all:queryResult});
-
-                }
+                    if (queryResult === null) {
+                        console.log("error")
+                    } else {
+                        res.render('places/home',{all:queryResult});
+                    }
             }
         });
     };
@@ -50,7 +49,7 @@ module.exports = (db) => {
         }
 
         function doneQuery () {
-            db.places.addNewPlace (req.body,photo.name,(queryResult)=>{
+            db.places.addNewPlace (req.body,photo.name,(err,queryResult)=>{
                 console.log("Result of query ", queryResult);
 
                 res.redirect("/places");

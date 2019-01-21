@@ -5,38 +5,55 @@ module.exports = (db) => {
     };
 
     let registerUser = (req, res) => {
-        db.users.newUser(req.body, (error,queryResult) =>{
-            if (error) {
-                console.log("error", error);
-            } else {
-                console.log("Okay registered User!");
+        db.users.newUser(req.body, (err,queryResult) =>{
                 res.redirect('/places')
+        });
+    };
+
+    let logForm = (req,res) => {
+        res.render('users/login');
+    };
+
+    let checkLogin = (req,res)=> {
+
+        db.users.logIn(req.body,(error,queryResult)=> {
+            if(error){
+                console.log("There is an error!", error);
+            } else {
+                let usersDb = queryResult;
+                let username = req.body.username;
+                let password = db.users.hash(req.body.password);
+                    for (let i=0; i < usersDb.length; i++) {
+                            //iterate thru the users Table
+                            //check is username exist
+                            if (usersDb[i].username === username) {
+                                //if username exist check password
+                                if(usersDb[i].password === password) {
+                                    res.cookie('loggedin', {
+                                        userId: usersDb[i].id,
+                                        name: usersDb[i].name,
+                                        username: usersDb[i].username,
+                                        pwd: password })
+                                    res.redirect('/places');
+                                    return
+                                } else {
+                                    res.send("wrong password!");
+                                    return;
+                                }
+                             //if username did not exist
+                            } else {
+                                res.send("Please register!!");
+                                return;
+                            }
+                    }
             }
         });
     };
 
-    let logIn = (req,res) => {
-        res.render('users/login');
-    }
-
     return {
         createForm,
         registerUser,
-        logIn,
+        logForm,
+        checkLogin,
     };
 };
-
-
-
-
-// let index = (request, response)=>{
-
-//         // run this function when the query is done
-//         let doneWithQuery = (places) =>{
-
-//         response.render('home',{all:places});
-//         };
-
-//         db.places.newUser(doneWithQuery);
-
-//     };
