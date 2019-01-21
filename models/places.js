@@ -19,15 +19,6 @@ module.exports = (dbPoolInstance) => {
         });
     }
 
-    // let getAllPlaces = (completed) =>{
-    //     let queryText = 'SELECT * FROM places';
-
-    //     dbPoolInstance.query(queryText, (error, queryResult )=>{
-    //     // console.log( "done with query", queryResult.rows );
-    //     completed(queryResult.rows);
-    //       // return queryResult.rows;
-    //     });
-    // }
 
     let filterArea = (query,callback)=> {
 
@@ -81,30 +72,44 @@ module.exports = (dbPoolInstance) => {
         let path = `photo-uploads/${photoName}`;
 
         uploadPhoto(path, insertData);
-        function uploadPhoto (link,callback) {
-                // console.log("Second Upload photo function");
-                cloudinary.uploader.upload(link, (result)=>{
-                // console.log("Third execute cloudinary");
-                // console.log("Fourth value in result ", result.public_id);
-                    callback(result.public_id);
-                });
+
+            function uploadPhoto (link,callback) {
+                    // console.log("Second Upload photo function");
+                    cloudinary.uploader.upload(link, (result)=>{
+                    // console.log("Third execute cloudinary");
+                    // console.log("Fourth value in result ", result.public_id);
+                        callback(result.public_id);
+                    });
             };
 
 
-        function insertData (publicId) {
-            let amenities = requestBody.amenities.join(", ");
-            let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
-            let values = [requestBody.name, requestBody.address,  publicId, amenities, requestBody.open_hours, requestBody.area];
-                dbPoolInstance.query(queryText, values, (error, queryResult)=>{
-                    // console.log(queryResult.rows);
-                    callback(error,queryResult.rows);
-                });
-        }
+            function insertData (publicId) {
+                let amenities = requestBody.amenities.join(", ");
+                let queryText = 'INSERT INTO places (place_name, address, img_url, amenities, open_hours,areas_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+                let values = [requestBody.name, requestBody.address,  publicId, amenities, requestBody.open_hours, requestBody.area];
+                    dbPoolInstance.query(queryText, values, (error, queryResult)=>{
+                        // console.log(queryResult.rows);
+                        callback(error,queryResult.rows);
+                    });
+            }
+    }
+
+    let deleteCurrent = (params,callback) => {
+        let queryText = `DELETE FROM places WHERE id = ${params}`
+            dbPoolInstance.query(queryText,(error,queryResult)=>{
+                if (error) {
+                    callback(error, null);
+                } else {
+                    console.log("Delete Okay!");
+                    callback(null,null);
+                }
+            });
     }
 
     return {
     getAllPlaces,
     filterArea,
     addNewPlace,
+    deleteCurrent,
     };
 };

@@ -4,7 +4,22 @@ module.exports = (db) => {
     let index = (req, res)=>{
         // run this function when the query is done
         let doneQuery = (places) =>{
-        res.render('places/home',{all:places});
+            // let check = null;
+
+            // if (req.cookies.loggedin === undefined)  {
+            //     check = {
+            //         btn: "Log In",
+            //         visibility: "invisible"
+            //     }
+            // } else {
+            //     check = {
+            //         btn: "Log Out",
+            //         visibility: "visible"
+            //     }
+            // }
+            // , logged:check}
+
+            res.render('places/home',{all:places});
         };
 
         db.places.getAllPlaces(doneQuery);
@@ -27,10 +42,8 @@ module.exports = (db) => {
     };
 
     let createPlace = (req,res)=> {
-        res.render('places/add-place')
+        res.render('places/add-place');
     };
-
-
 
     let addPlace = (req,res)=> {
         let photo = req.files.img_url;
@@ -51,10 +64,19 @@ module.exports = (db) => {
         function doneQuery () {
             db.places.addNewPlace (req.body,photo.name,(err,queryResult)=>{
                 console.log("Result of query ", queryResult);
-
                 res.redirect("/places");
             });
         }
+    };
+
+    let deletePlace = (req,res)=> {
+        db.places.deleteCurrent(req.params.id, (err, queryResult)=>{
+            if (err) {
+                console.log("There is an error! ", err);
+            } else {
+                res.redirect("/places");
+            }
+        });
     };
 
     return {
@@ -62,5 +84,6 @@ module.exports = (db) => {
         filter,
         createPlace,
         addPlace,
+        deletePlace,
     };
 };

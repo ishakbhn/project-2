@@ -41,7 +41,7 @@ require('./routes')(app, db);
 
 // Root GET request (it doesn't belong in any controller file)
 app.get('/', (req, res) => {
-  response.send('home');
+  res.send('home');
 });
 
 // Catch all unmatched requests and return 404 not found page

@@ -7,7 +7,7 @@ h1{
   font-family: 'Amaranth', sans-serif;
 }
 
-#add-btn {
+.add-btn a {
 	color: white;
 	text-decoration: none;
 }
@@ -28,4 +28,8 @@ h1{
 
 .header-bg {
 
+}
+
+.edit-form {
+	display:inline;
 }

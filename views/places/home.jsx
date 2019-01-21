@@ -5,19 +5,32 @@ var DefaultLayout = require('../default');
 
 class Home extends React.Component {
     render() {
-        // console.log(this.props.all);
+        // console.log("Values in this props logged :", this.props.logged);
+
+
         const allPlaces = this.props.all.map((data,index) =>{
+            let editLink = `/places/edit/${data.id}`;
+            let delLink = `/places/delete/${data.id}?_method=DELETE`;
             let imgLink = `http://res.cloudinary.com/dhapevpz3/image/upload/${data.img_url}`;
             return <div className="p-3 mb-5 bg-light"key = {index}>
                     <h4 className="text-center"> {data.place_name} </h4>
                     <div className="d-flex justify-content-center" >
                     <img className = "img-fluid m-3" src={imgLink} alt="place_pic"/>
                     </div>
-                    <div className = "mx-5 px-4">
+                        <div className = "mx-5 px-4">
                         <p> Address: {data.address} </p>
                         <p> Amenities: {data.amenities} </p>
                         <p> Opening hours: {data.open_hours} </p>
-                    </div>
+                        </div>
+                        <div className="my-2 mx-5 px-3 text-right">
+                            <form className="edit-form" method="put" action={editLink}>
+                                <button className="btn btn-info mx-3" type="submit">Edit</button>
+                            </form>
+                            <form className="edit-form" method="POST" action={delLink}>
+                                <button className="btn btn-danger " type="submit">Delete</button>
+                            </form>
+
+                        </div>
                    </div>
 
         })
@@ -70,7 +83,7 @@ class Home extends React.Component {
                                                 <button type="submit" className="btn btn-primary">Filter</button>
                                             </div>
                                             <div className="my-3 text-center" >
-                                                <button className="btn btn-primary"><a href="/places/new" id="add-btn"> Add New Study Place</a></button>
+                                                <button className="btn btn-primary add-btn" > <a href="/places/new"> Add New Study Place</a></button>
                                             </div>
                                 </form>
                             </div>
